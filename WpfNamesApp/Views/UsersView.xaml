@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="WpfNamesApp.Views.UsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodels="clr-namespace:WpfNamesApp.ViewModels"
+             xmlns:local="clr-namespace:WpfNamesApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10">
+
+        <Grid.Resources>
+            <viewmodels:UserViewModel x:Key="_users"/>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label>Users</Label>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
+            <TextBox Text="{Binding User.Name}" />
+            <Button x:Name="btnAdd1" Margin="0,5,0,0" Command="{Binding ButtonAddUser_Click}" >Add User</Button>
+        </StackPanel>
+        <ListView Grid.Row="2"  DataContext="{Binding Source={StaticResource _users}, Mode=OneWay}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <TextBlock Text="{Binding Name}"></TextBlock>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <TextBlock Text="{Binding Email}"></TextBlock>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</UserControl>
